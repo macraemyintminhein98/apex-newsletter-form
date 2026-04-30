@@ -3,30 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APEX Newsletter Signup Form</title>
+    <title>Newsletter Signup - APEX</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .embed-container { max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); background-color: #fff; }
+        .form-group { margin-bottom: 15px; }
+        .form-input { width: 100%; padding: 10px; border: 1px solid #cbd5e0; border-radius: 4px; box-sizing: border-box; }
+        .form-button { width: 100%; padding: 10px; background-color: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.2s; }
+        .form-button:hover { background-color: #2563eb; }
+        .success-message { color: green; margin-top: 10px; text-align: center; }
+        .error-message { color: red; margin-top: 10px; text-align: center; }
+    </style>
 </head>
-<body class="bg-neutral-900 text-neutral-100 flex items-center justify-center min-h-screen p-4">
-    <div class="bg-neutral-800 rounded-lg shadow-xl p-8 max-w-sm w-full border border-neutral-700">
-        <h2 class="text-2xl font-bold mb-4 text-center text-blue-400">Subscribe to APEX</h2>
-        <p class="text-center text-neutral-300 mb-6">Get our latest updates and exclusive content!</p>
-        <form class="space-y-4">
-            <div>
-                <label for="email" class="block text-sm font-medium text-neutral-400 mb-1">Email address</label>
-                <input type="email" id="email" name="email" placeholder="your@example.com" required
-                       class="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-neutral-100">
+<body class="bg-gray-100 font-sans">
+    <div class="embed-container">
+        <h2 class="text-2xl font-bold mb-4 text-center">Join Our Newsletter</h2>
+        <p class="text-gray-600 mb-6 text-center text-sm">Get updates directly to your inbox.</p>
+        <form id="newsletter-form">
+            <div class="form-group">
+                <label for="email" class="sr-only">Email address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required class="form-input">
             </div>
-            <div>
-                <label for="name" class="block text-sm font-medium text-neutral-400 mb-1">Name (optional)</label>
-                <input type="text" id="name" name="name" placeholder="John Doe"
-                       class="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-neutral-100">
-            </div>
-            <button type="submit"
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-neutral-800">
-                Subscribe
-            </button>
-            <p class="text-xs text-neutral-500 text-center mt-4">No spam, we promise!</p>
+            <button type="submit" class="form-button">Subscribe</button>
+            <div id="message" class="hidden"></div>
         </form>
     </div>
+    <script>
+        document.getElementById('newsletter-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const messageDiv = document.getElementById('message');
+            messageDiv.classList.add('hidden');
+            messageDiv.innerHTML = '';
+
+            try {
+                const response = await fetch('/api/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const data = await response.json();
+
+                messageDiv.classList.remove('hidden');
+                if (data.success) {
+                    messageDiv.className = 'success-message';
+                    messageDiv.textContent = 'Thanks for subscribing!';
+                    document.getElementById('newsletter-form').reset();
+                } else {
+                    messageDiv.className = 'error-message';
+                    messageDiv.textContent = data.message || 'Something went wrong.';
+                }
+            } catch (error) {
+                messageDiv.classList.remove('hidden');
+                messageDiv.className = 'error-message';
+                messageDiv.textContent = 'Network error. Please try again.';
+            }
+        });
+    </script>
 </body>
 </html>
