@@ -1,24 +1,18 @@
-# APEX Newsletter Signup Form
+# APEX Newsletter Form
 
-**A beautifully designed, highly customizable, and easily embeddable newsletter signup form template for modern websites.**
+**A dead-simple, embeddable newsletter signup form for indie hackers and small businesses.**
 
-This template is built with React and Tailwind CSS, offering: 
-- **Clean, modern design:** Ready to use out-of-the-box.
-- **Full customizability:** Easily adapt styles and fields to match your brand.
-- **Integration flexibility:** Includes examples for Mailchimp, ConvertKit, and generic API endpoints.
-- **Optimized for developers:** Simple to integrate into any React, Next.js, or HTML project.
+Get a clean, customizable HTML snippet and a basic serverless backend to collect emails. Perfect for quick implementation without the complexity of traditional email marketing platforms.
 
-## Features:
+### Features:
+-   **Minimalist Design:** Easily customizable with TailwindCSS.
+-   **Embeddable:** Just copy and paste the provided HTML snippet.
+-   **Serverless Backend:** Collects emails into a downloadable CSV via a Vercel-compatible serverless function.
+-   **Secure and Simple:** Focus on getting subscribers, not managing infrastructure.
 
-- React Component for easy integration.
-- Tailwind CSS for responsive and flexible styling.
-- State management for form inputs.
-- Example API integrations (Mailchimp SDK, generic POST).
-- Embeddable as an iframe or directly as a component.
-- Well-commented source code.
+### How to Use:
+1.  **Purchase** the product to get your unique embed code.
+2.  **Paste** the HTML snippet into your website.
+3.  **Emails** are collected and securely stored, accessible for download (detailed instructions provided upon purchase).
 
-## Get Started:
-
-Detailed documentation on how to customize, integrate, and deploy your new newsletter signup form is included in the full product download. 
-
-**[Purchase Now](#) to get the complete source code and documentation!**
+Start building your audience today!
